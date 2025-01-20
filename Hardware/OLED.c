@@ -262,9 +262,36 @@ void OLED_ShowBinNum(uint8_t Line, uint8_t Column, uint32_t Number, uint8_t Leng
 		OLED_ShowChar(Line, Column + i, Number / OLED_Pow(2, Length - i - 1) % 2 + '0');
 	}
 }
-
-void OLED_ShowFNum(uint8_t x,uint8_t y,float Fnum)
+/*
+* Function    OLED_ShowFNum(uint8_t x,uint8_t y,float Fnum,uint8_t size)
+* @date           
+* @brief        显示浮点型数据，
+* @param[in]   uint8_t x,uint8_t y,float Fnum,uint8_t size
+* @param[out]    
+* @retval    
+* @par History   
+*/
+void OLED_ShowFNum(uint8_t x,uint8_t y,float Fnum,uint8_t size)
 {
+	int16_t a_int=(int)Fnum;
+	if(Fnum>0)
+	{
+	int16_t a_int=(int)Fnum; 
+	OLED_ShowString(x,y,"+");	
+	int16_t b_int=(Fnum-a_int)*100;
+    OLED_ShowNum(x,y+1, a_int, size);
+	OLED_ShowString(x,y+size+1,".");
+	OLED_ShowNum(x,y+size+2, b_int, 2);
+	}
+	else if(Fnum<=0)
+	{
+	int16_t a_int=-(int)Fnum;	
+	OLED_ShowString(x,y,"-");	
+	int16_t b_int=(Fnum-a_int)*100;
+    OLED_ShowNum(x,y+1, a_int, size);
+	OLED_ShowString(x,y+size+1,".");
+	OLED_ShowNum(x,y+size+2, b_int, 2);
+	}
 
 }
 /**

@@ -17,16 +17,16 @@ float Trun_Kp=0;   //30
 float Trun_Kd=0; //3000
 
 
-float Vertical(float Expect_Angle,float Current_Angle,float gyro_y)
+int16_t Vertical(float Expect_Angle,float Current_Angle,float gyro_y)
 {
 	int16_t PWM_Out;
 PWM_Out= Vertical_Kp*(Current_Angle-Expect_Angle)+Vertical_Kd*gyro_y;
 	return  PWM_Out;
 }
 
-float Velocity(float Expect_Speed,int16_t Encoder_Left,int16_t Encoder_Right)
+int16_t Velocity(float Expect_Speed,int16_t Encoder_Left,int16_t Encoder_Right)
 {
-	static float  Encoder_Err,Encoder_Err_Lowout,Encoder_Err_Lowout_last,Encoder_Sum,PWM_Out;
+	static int Encoder_Err,Encoder_Err_Lowout,Encoder_Err_Lowout_last,Encoder_Sum,PWM_Out;
 	Encoder_Err=(Encoder_Left+Encoder_Right)-Expect_Speed; //编码器误差
 	//一阶速度滤波
 	Encoder_Err*=0.3;
@@ -45,7 +45,7 @@ float Velocity(float Expect_Speed,int16_t Encoder_Left,int16_t Encoder_Right)
 }
 
 //转向环
-float Turn(float Expect_Yaw,float gyro_z )
+int16_t Turn(float Expect_Yaw,float gyro_z )
 {
 	int16_t PWM_Out=0;
 	if(Expect_Yaw==0)

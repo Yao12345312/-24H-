@@ -82,7 +82,7 @@ void Right_Motor_Speed(int16_t Speed) //右电机
 * @retval    
 * @par History   
 */
-void Motor_Limitation(float* Left_Speed , float* Right_Speed)
+void Motor_Limitation(int16_t* Left_Speed , int16_t* Right_Speed)
 {
 	//左电机限速
 	if(*Left_Speed>PWM_MAX)

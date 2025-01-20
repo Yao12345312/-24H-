@@ -18,23 +18,23 @@ uint16_t USART_RxData;
 
 int16_t Encoder_Left_Speed,Encoder_Right_Speed;  //编码器速度
 
-float Mechanical_median=-1;		//机械中值，精确到小数点后2位
+float Mechanical_median=-1.6;		//机械中值，精确到小数点后2位
 float Expect_Speed=0;		//转向时期待的速度
 float Expect_Turn_Angle=0;
 
-float Vertical_Out;  			//直立环输出
-float Velocity_Out;			//速度环输出
-float Turn_Out;				//转向环输出
+int16_t Vertical_Out;  			//直立环输出
+int16_t Velocity_Out;			//速度环输出
+int16_t Turn_Out;				//转向环输出
 
-float LeftMotor_Out;			//左电机输出
-float RightMotor_Out;			//右电机输出
-float PWM_Out;				//最终输出
+int16_t LeftMotor_Out;			//左电机输出
+int16_t RightMotor_Out;			//右电机输出
+int16_t PWM_Out;				//最终输出
 
 
 int main(void)
 {
     OLED_Init();
-	//Serial_Init();
+	Serial_Init();
 	MPU6050_Init();
 	MPU6050_EXTI_Init();
 	PWM_Init();
@@ -64,14 +64,13 @@ int main(void)
 		
 		Motor_Limitation(&LeftMotor_Out,&RightMotor_Out);//输出传递到电机
 		
-		//Left_Motor_Speed(LeftMotor_Out);
-		//Right_Motor_Speed(RightMotor_Out);
+		Left_Motor_Speed(LeftMotor_Out);
+		Right_Motor_Speed(RightMotor_Out);
 		
 		//喂狗
-
 		}
 		
-		OLED_ShowFNum(3,1,imu_Angle.Roll,3);
+		//OLED_ShowFNum(3,1,imu_Angle.Roll,3);
 		OLED_ShowSignedNum(4,1,imu_data.GX, 5);
 		
 	 }
