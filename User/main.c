@@ -64,14 +64,14 @@ int main(void)
 		
 		Motor_Limitation(&LeftMotor_Out,&RightMotor_Out);//输出传递到电机
 		
-		Left_Motor_Speed(LeftMotor_Out);
-		Right_Motor_Speed(RightMotor_Out);
+		//Left_Motor_Speed(LeftMotor_Out);
+		//Right_Motor_Speed(RightMotor_Out);
 		
 		//喂狗
 
 		}
 		
-		OLED_ShowSignedNum(3,1,imu_Angle.Roll, 5);
+		OLED_ShowFNum(3,1,imu_Angle.Roll,3);
 		OLED_ShowSignedNum(4,1,imu_data.GX, 5);
 		
 	 }
